@@ -28,15 +28,7 @@ OregonH.Game.init = function(){
 
   //setup caravan
   this.caravan = OregonH.Caravan;
-  this.caravan.init({
-    day: 0,
-    distance: 0,
-    crew: 30,
-    food: 80,
-    oxen: 2,
-    money: 300,
-    firepower: 2
-  });
+  this.caravan = new Caravan(0, 0, 30, 80, 2, 300, 2);
 
   //pass references
   this.caravan.ui = this.ui;
