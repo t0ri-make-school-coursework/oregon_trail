@@ -2,7 +2,7 @@ var OregonH = OregonH || {};
 
 OregonH.Event = {};
 
-OregonH.Event.eventTypes = [
+const events = [
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
@@ -135,7 +135,7 @@ OregonH.Event.eventTypes = [
 OregonH.Event.generateEvent = function(){
   //pick random one
   let eventIndex = Math.floor(Math.random() * this.eventTypes.length);
-  let eventData = this.eventTypes[eventIndex];
+  let events = this.eventTypes[eventIndex];
 
   //events that consist in updating a stat
   if(eventData.type == 'STAT-CHANGE') {

@@ -1,7 +1,3 @@
-var OregonH = OregonH || {};
-
-OregonH.Caravan = {};
-
 class Caravan {
     constructor(day, distance, crew, food, oxen, money, firepower) {
         this.day = day;
