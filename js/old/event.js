@@ -1,4 +1,8 @@
-const eventTypes = [
+var OregonH = OregonH || {};
+
+OregonH.Event = {};
+
+OregonH.Event.eventTypes = [
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
@@ -128,83 +132,78 @@ const eventTypes = [
   }
 ];
 
-class Event {
-    constructor(game) {
-        this.game = game;
-    }
+OregonH.Event.generateEvent = function(){
+  //pick random one
+  let eventIndex = Math.floor(Math.random() * this.eventTypes.length);
+  let eventData = this.eventTypes[eventIndex];
 
-    generateEvent() {
-        let eventIndex = Math.floor(Math.random() * this.eventTypes.length);
-        let eventData = this.eventTypes[eventIndex];
+  //events that consist in updating a stat
+  if(eventData.type == 'STAT-CHANGE') {
+    this.stateChangeEvent(eventData);
+  }
 
-        //events that consist in updating a stat
-        if(eventData.type == 'STAT-CHANGE') {
-          this.stateChangeEvent(eventData);
-        }
+  //shops
+  else if(eventData.type == 'SHOP') {
+    //pause game
+    this.game.pauseJourney();
 
-        //shops
-        else if(eventData.type == 'SHOP') {
-          //pause game
-          this.game.pauseJourney();
+    //notify user
+    this.ui.notify(eventData.text, eventData.notification);
 
-          //notify user
-          this.game.ui.notify(eventData.text, eventData.notification);
+    //prepare event
+    this.shopEvent(eventData);
+  }
 
-          //prepare event
-          this.shopEvent(eventData);
-        }
+  //attacks
+  else if(eventData.type == 'ATTACK') {
+    //pause game
+    this.game.pauseJourney();
 
-        //attacks
-        else if(eventData.type == 'ATTACK') {
-          //pause game
-          this.game.pauseJourney();
+    //notify user
+    this.ui.notify(eventData.text, eventData.notification);
 
-          //notify user
-          this.game.ui.notify(eventData.text, eventData.notification);
+    //prepare event
+    this.attackEvent(eventData);
+  }
+};
 
-          //prepare event
-          this.attackEvent(events);
-        }
-    }
+OregonH.Event.stateChangeEvent = function(eventData) {
+  //can't have negative quantities
+  if(eventData.value + this.caravan[eventData.stat] >= 0) {
+    this.caravan[eventData.stat] += eventData.value;
+    this.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
+  }
+};
 
-    stateChangeEvent(eventData) {
-      //can't have negative quantities
-      if(eventData.value + this.game.caravan[eventData.stat] >= 0) {
-        this.game.caravan[eventData.stat] += eventData.value;
-        this.game.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
-      }
-    };
+OregonH.Event.shopEvent = function(eventData) {
+  //number of products for sale
+  let numProds = Math.ceil(Math.random() * 4);
 
-    shopEvent(eventData) {
-      //number of products for sale
-      let numProds = Math.ceil(Math.random() * 4);
+  //product list
+  let products = [];
+  let j, priceFactor;
 
-      //product list
-      let products = [];
-      let j, priceFactor;
+  for(var i = 0; i < numProds; i++) {
+    //random product
+    j = Math.floor(Math.random() * eventData.products.length);
 
-      for(var i = 0; i < numProds; i++) {
-        //random product
-        j = Math.floor(Math.random() * eventData.products.length);
+    //multiply price by random factor +-30%
+    priceFactor = 0.7 + 0.6 * Math.random();
 
-        //multiply price by random factor +-30%
-        priceFactor = 0.7 + 0.6 * Math.random();
+    products.push({
+      item: eventData.products[j].item,
+      qty: eventData.products[j].qty,
+      price: Math.round(eventData.products[j].price * priceFactor)
+    });
+  }
 
-        products.push({
-          item: eventData.products[j].item,
-          qty: eventData.products[j].qty,
-          price: Math.round(eventData.products[j].price * priceFactor)
-        });
-      }
+  this.ui.showShop(products);
+};
 
-      this.game.ui.showShop(products);
-    };
+//prepare an attack event
+OregonH.Event.attackEvent = function(eventData){
+  let firepower = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_FIREPOWER_AVG);
+  let gold = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_GOLD_AVG);
 
-
-    attackEvent(eventData) {
-      let firepower = Math.round((0.7 + 0.6 * Math.random()) * this.game.ENEMY_FIREPOWER_AVG);
-      let gold = Math.round((0.7 + 0.6 * Math.random()) * this.game.ENEMY_GOLD_AVG);
-
-      this.game.ui.showAttack(firepower, gold);
-    };
+  this.ui.showAttack(firepower, gold);
 };
