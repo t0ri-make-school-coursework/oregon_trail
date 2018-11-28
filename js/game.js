@@ -99,3 +99,5 @@ class Game {
 }
 
 let game = new Game();
+game.startGame();
+console.log(game)

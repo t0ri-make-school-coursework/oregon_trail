@@ -4,22 +4,22 @@ class UI {
     }
 
     notify() {
-        document.getElementById('updates-area').innerHTML = `<div class="update-${type}">Day ${Math.ceil(this.caravan.day)}: ${message} </div>` + document.getElementById('updates-area').innerHTML;
+        document.getElementById('updates-area').innerHTML = `<div class="update-${type}">Day ${Math.ceil(this.game.caravan.day)}: ${message} </div>` + document.getElementById('updates-area').innerHTML;
     }
 
     refreshStats() {
         //modify the dom
-        document.getElementById('stat-day').innerHTML = Math.ceil(this.caravan.day);
-        document.getElementById('stat-distance').innerHTML = Math.floor(this.caravan.distance);
-        document.getElementById('stat-crew').innerHTML = this.caravan.crew;
-        document.getElementById('stat-oxen').innerHTML = this.caravan.oxen;
-        document.getElementById('stat-food').innerHTML = Math.ceil(this.caravan.food);
-        document.getElementById('stat-money').innerHTML = this.caravan.money;
-        document.getElementById('stat-firepower').innerHTML = this.caravan.firepower;
-        document.getElementById('stat-weight').innerHTML = `${Math.ceil(this.caravan.weight)} / ${this.caravan.capacity}`;
+        document.getElementById('stat-day').innerHTML = Math.ceil(this.game.caravan.day);
+        document.getElementById('stat-distance').innerHTML = Math.floor(this.game.caravan.distance);
+        document.getElementById('stat-crew').innerHTML = this.game.caravan.crew;
+        document.getElementById('stat-oxen').innerHTML = this.game.caravan.oxen;
+        document.getElementById('stat-food').innerHTML = Math.ceil(this.game.caravan.food);
+        document.getElementById('stat-money').innerHTML = this.game.caravan.money;
+        document.getElementById('stat-firepower').innerHTML = this.game.caravan.firepower;
+        document.getElementById('stat-weight').innerHTML = `${Math.ceil(this.game.caravan.weight)} / ${this.game.caravan.capacity}`;
 
         //update caravan position
-        document.getElementById('caravan').style.left = `${(380 * this.caravan.distance/OregonH.FINAL_DISTANCE)} px`;
+        document.getElementById('caravan').style.left = `${(380 * this.game.caravan.distance/OregonH.FINAL_DISTANCE)} px`;
     }
 
     showShop(products) {
