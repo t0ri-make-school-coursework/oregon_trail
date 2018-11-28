@@ -1,5 +1,6 @@
 class Caravan {
-    constructor(day, distance, crew, food, oxen, money, firepower) {
+    constructor(game, day, distance, crew, food, oxen, money, firepower) {
+        this.game = game;
         this.day = day;
         this.distance = distance;
         this.crew = crew;
@@ -11,8 +12,8 @@ class Caravan {
         this.droppedFood = 0;
         this.droppedGuns = 0;
 
-        this.capacity = this.oxen * OregonH.weightPerOx + this.crew * OregonH.weightPerPerson;;
-        this.weight = this.food * OregonH.foodWeight + this.firepower * OregonH.firePowerWeight;
+        this.capacity = this.oxen * this.game.weightPerOx + this.crew * this.game.weightPerPerson;;
+        this.weight = this.food * this.game.foodWeight + this.firepower * this.game.firePowerWeight;
     }
 
     updateWeight() {
@@ -20,7 +21,7 @@ class Caravan {
             this.firepower--;
             this.droppedGuns++;
 
-            this.weight -= OregonH.firePowerWeight;
+            this.weight -= this.game.firePowerWeight;
 
             this.ui.notify(`Left ${this.droppedGuns} guns behind`, 'negative');
         };
@@ -29,7 +30,7 @@ class Caravan {
             this.food--;
             this.droppedFood++;
 
-            this.weight -= OregonH.foodWeight;
+            this.weight -= this.game.foodWeight;
 
             this.ui.notify(`Left ${this.droppedFood} food provisions behind`, 'negative');
         }
@@ -37,13 +38,13 @@ class Caravan {
 
     updateDistance() {
         let diff = this.capacity - this.weight;
-        let speed = OregonH.slowSpeed + diff/this.capacity * OregonH.fullSpeed;
+        let speed = this.game.slowSpeed + diff/this.capacity * this.game.fullSpeed;
 
         this.distance += speed
     }
 
     consumeFood() {
-        this.food -= this.crew * OregonH.foodPerPerson;
+        this.food -= this.crew * this.game.foodPerPerson;
 
         if (this.food < 0) {
             this.food = 0

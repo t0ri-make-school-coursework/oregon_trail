@@ -1,27 +1,27 @@
 class Game {
-    constructor() {
+    constructor(gameActive=true, previousTime=null) {
         this.ui = new UI(this);
         this.event = new Event(this);
-        this.caravan = new Caravan(0, 0, 30, 80, 2, 300, 2);
+        this.caravan = new Caravan(this, 0, 0, 30, 80, 2, 300, 2);
 
         // run variables
         this.gameActive = gameActive;
         this.previousTime = previousTime;
 
         // constants
-        this.WEIGHT_PER_OX = 20;
-        this.WEIGHT_PER_PERSON = 2;
-        this.FOOD_WEIGHT = 0.6;
-        this.FIREPOWER_WEIGHT = 5;
-        this.GAME_SPEED = 800;
-        this.DAY_PER_STEP = 0.2;
-        this.FOOD_PER_PERSON = 0.02;
-        this.FULL_SPEED = 5;
-        this.SLOW_SPEED = 3;
-        this.FINAL_DISTANCE = 1000;
-        this.EVENT_PROBABILITY = 0.15;
-        this.ENEMY_FIREPOWER_AVG = 5;
-        this.ENEMY_GOLD_AVG = 50;
+        this.weightPerOx = 20;
+        this.weightPerPerson = 2;
+        this.foodWeight = 0.6;
+        this.firepowerWeight = 5;
+        this.gameSpeed = 800;
+        this.dayPerStep = 0.2;
+        this.foodPerPerson = 0.02;
+        this.fullSpeed = 5;
+        this.slowSpeed = 3;
+        this.finalDistance = 1000;
+        this.eventProbability = 0.15;
+        this.enemyFirePowerAvg = 5;
+        this.enemyGoldAvg = 50;
     };
 
     startGame() {
@@ -41,7 +41,7 @@ class Game {
         let progress = timestamp - this.previousTime;
 
         //game update
-        if (progress >= this.GAME_SPEED) {
+        if (progress >= this.gameSpeed) {
           this.previousTime = timestamp;
           this.updateGame();
         }
@@ -51,7 +51,7 @@ class Game {
       };
 
     updateGame() {
-        this.caravan.day += this.DAY_PER_STEP;
+        this.caravan.day += this.dayPerStep;
 
         this.caravan.consumeFood();
 
@@ -75,14 +75,14 @@ class Game {
         }
 
         // win game
-        if(this.caravan.distance >= this.FINAL_DISTANCE) {
+        if(this.caravan.distance >= this.finalDistance) {
           this.ui.notify('You have returned home!', 'positive');
           this.gameActive = false;
           return;
         }
 
         //random events
-          if(Math.random() <= this.EVENT_PROBABILITY) {
+          if(Math.random() <= this.eventProbability) {
             this.eventManager.generateEvent();
           }
     }
@@ -97,3 +97,5 @@ class Game {
     };
 
 }
+
+let game = new Game();

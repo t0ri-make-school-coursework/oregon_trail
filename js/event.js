@@ -202,8 +202,8 @@ class Event {
 
 
     attackEvent(eventData) {
-      let firepower = Math.round((0.7 + 0.6 * Math.random()) * this.game.ENEMY_FIREPOWER_AVG);
-      let gold = Math.round((0.7 + 0.6 * Math.random()) * this.game.ENEMY_GOLD_AVG);
+      let firepower = Math.round((0.7 + 0.6 * Math.random()) * this.game.enemyFirePowerAvg);
+      let gold = Math.round((0.7 + 0.6 * Math.random()) * this.game.enemyGoldAvg);
 
       this.game.ui.showAttack(firepower, gold);
     };
