@@ -1,80 +1,140 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono');
 
-element {
-    --main-bg-color: #fff;
+:root {
     --roboto: 'Roboto', sans-serif;
     --roboto-mono: 'Roboto Mono', monospace;
-}
-
-html {
-    height: 100%;
-}
-
-#header-text {
-    background:
-}
-
-body {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    height: 100%;
-    overflow: hidden;
-    font-family: var(--roboto);
 }
 
 .hidden {
     display: none;
 }
 
-#home h1 {
-    color: skyblue;
-    margin-left: 50vw;
+body {
+    height: 100vh;
+    width: 100vw;
+
+    padding: 0;
+    margin: 0;
+
+    overflow: hidden;
+
+    font-family: var(--roboto);
+    font-size: 16px;
+
+    background-color: #87CEEB;
 }
+
+#home h1 {
+    margin-top: 50px;
+    color: white;
+    margin-left: calc(50vw - 87px);     /* h1 width = 87.5 ish */
+}
+
+/******************************
+
+        POSITIONING
+
+******************************/
 
 #journey {
     height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#top {
+    width: 60vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 #progress-area {
+    width: 100vw;
+    margin-left: 50%;
+
     float: left;
     position: relative;
-    width: 600px;
-    margin: 10px;
 }
 
-#trees {
-    width: 100%;
+/******************************
+
+           CARDS
+
+******************************/
+
+.card {
+    width: 15vw;
+    height: 15vw;
+
+    margin: 15px;
+    padding: 15px;
+
+    border: 2px solid #f2f2f2;
+    border-radius: 25px;
+
+    background-color: white;
 }
 
-#caravan {
-    position: absolute;
-    bottom: 30px;
-    left: 0;
+.card button {
+    clear: both;
+    margin: 15px auto;
+    padding: 10px;
+
+    background-color: #fff;
+
+    border: 1px solid #90908F;
+    border-radius: 5px;
+}
+
+.card:last-of-type {
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #stats-area {
-    background-color: white;
-    float: left;
-    height: 150px;
-    width: 156px;
-    margin: 10px;
-    padding: 10px;
-    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: #555;
+    font-family: var(--roboto-mono) !important;
+    font-size: .9em;
+    line-height: 1.5em;
+}
+
+#stats-area h2 {
+    margin-top: -5px;
+
+    color: black;
+    font-size: 1.25em;
+    font-weight: 300;
+    font-family: var(--roboto);
+    text-align: center;
 }
 
 .stat-value {
     float: right;
 }
 
+/******************************
+
+        UPDATES-AREA
+
+******************************/
 #updates-area {
-    background-color: white;
-    float: left;
-    width: 350px;
-    margin: 10px;
-    height: 150px;
-    padding: 10px;
-    font-size: 12px;
+    height: 15vw;
+
+    font-size: .85em;
     overflow-y: scroll;
 }
 
@@ -90,34 +150,32 @@ body {
     color: #90908F;
 }
 
-#shop {
-    float: left;
-    background-color: white;
-    margin: 10px;
-    padding: 10px;
-    height: 90px;
-    width: 350px;
-}
+/******************************
 
+            SHOP
+
+******************************/
 .product {
-    float: left;
     margin: 5px;
-    padding: 2px;
-    border: 1px solid black;
-    font-size: 12px;
-}
-
-#shop button {
-    clear: both;
-    float: left;
-    margin: 5px;
-}
-
-#attack {
-    float: left;
-    background-color: white;
-    margin: 10px;
     padding: 10px;
-    height: 60px;
-    width: 150px;
+
+    border: 1px solid #90908F;
+    border-radius: 10px;
+    font-size: .8em;
+}
+
+/******************************
+
+          PROGRESS
+
+******************************/
+#trees {
+    width: 50%;
+}
+
+#caravan {
+    position: absolute;
+
+    left: 0;
+    bottom: 45px;
 }
