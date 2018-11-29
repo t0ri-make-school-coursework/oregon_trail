@@ -26,7 +26,9 @@ body {
 
 #home h1 {
     margin-top: 50px;
+
     color: white;
+
     margin-left: calc(50vw - 87px);     /* h1 width = 87.5 ish */
 }
 
