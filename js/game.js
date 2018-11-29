@@ -12,8 +12,8 @@ class Game {
         this.weightPerOx = 20;
         this.weightPerPerson = 2;
         this.foodWeight = 0.6;
-        this.firepowerWeight = 5;
-        this.gameSpeed = 800;
+        this.firePowerWeight = 5;
+        this.gameSpeed = 1000;
         this.dayPerStep = 0.2;
         this.foodPerPerson = 0.02;
         this.fullSpeed = 5;
@@ -83,7 +83,7 @@ class Game {
 
         //random events
           if(Math.random() <= this.eventProbability) {
-            this.eventManager.generateEvent();
+            this.event.generateEvent();
           }
     }
 
@@ -100,4 +100,3 @@ class Game {
 
 let game = new Game();
 game.startGame();
-console.log(game)

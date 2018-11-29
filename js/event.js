@@ -60,7 +60,7 @@ const eventTypes = [
       notification: 'positive',
       stat: 'money',
       value: 20,
-      text: 'Found some money along the trail. Money added: '
+      text: 'Found some coins in an abandoned wagon. Money added: '
   },
   {
     type: 'SHOP',
@@ -131,6 +131,7 @@ const eventTypes = [
 class Event {
     constructor(game) {
         this.game = game;
+        this.eventTypes = eventTypes;
     }
 
     generateEvent() {
@@ -163,7 +164,7 @@ class Event {
           this.game.ui.notify(eventData.text, eventData.notification);
 
           //prepare event
-          this.attackEvent(events);
+          this.attackEvent(eventTypes);
         }
     }
 

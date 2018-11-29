@@ -11,12 +11,12 @@ class Caravan {
 
         this.droppedFood = 0;
         this.droppedGuns = 0;
-
-        this.capacity = this.oxen * this.game.weightPerOx + this.crew * this.game.weightPerPerson;;
-        this.weight = this.food * this.game.foodWeight + this.firepower * this.game.firePowerWeight;
     }
 
     updateWeight() {
+        this.capacity = this.oxen * game.weightPerOx + this.crew * game.weightPerPerson;
+        this.weight = this.food * game.foodWeight + this.firepower * game.firePowerWeight;
+
         while (this.firepower && this.capacity <= this.weight) {
             this.firepower--;
             this.droppedGuns++;
@@ -38,7 +38,7 @@ class Caravan {
 
     updateDistance() {
         let diff = this.capacity - this.weight;
-        let speed = this.game.slowSpeed + diff/this.capacity * this.game.fullSpeed;
+        let speed = game.slowSpeed + diff/this.capacity * game.fullSpeed;
 
         this.distance += speed
     }
