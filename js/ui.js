@@ -19,7 +19,7 @@ class UI {
         document.getElementById('stat-weight').innerHTML = `${Math.ceil(this.game.caravan.weight)} / ${this.game.caravan.capacity}`;
 
         //update caravan position
-        document.getElementById('caravan').style.left = `${(380 * this.game.caravan.distance/this.finalDistance)} px`;
+        document.getElementById('caravan').style.left = `${(380 * game.caravan.distance / game.finalDistance)}px`;
     }
 
 
@@ -122,7 +122,7 @@ class UI {
           let damage = Math.ceil(Math.max(0, firepower * 2 * Math.random() - this.game.caravan.firepower));
 
           //check there are survivors
-          if(damage < this.game.caravan.crew) {
+          if (damage < this.game.caravan.crew) {
             this.game.caravan.crew -= damage;
             this.game.caravan.money += gold;
             this.notify(`${damage} people were killed fighting`, 'negative');

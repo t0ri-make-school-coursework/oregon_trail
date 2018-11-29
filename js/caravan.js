@@ -8,31 +8,36 @@ class Caravan {
         this.oxen = oxen;
         this.money = money;
         this.firepower = firepower;
-
-        this.droppedFood = 0;
-        this.droppedGuns = 0;
     }
 
     updateWeight() {
+        let droppedFood = 0;
+        let droppedGuns = 0;
+
         this.capacity = this.oxen * game.weightPerOx + this.crew * game.weightPerPerson;
         this.weight = this.food * game.foodWeight + this.firepower * game.firePowerWeight;
 
         while (this.firepower && this.capacity <= this.weight) {
             this.firepower--;
-            this.droppedGuns++;
+            droppedGuns++;
 
-            this.weight -= this.game.firePowerWeight;
-
-            this.ui.notify(`Left ${this.droppedGuns} guns behind`, 'negative');
+            this.weight -= game.firePowerWeight;
         };
+
+        if (droppedGuns) {
+            game.ui.notify(`Left ${droppedGuns} guns behind`, 'negative');
+        }
 
         while (this.food && this.capacity <= this.weight) {
             this.food--;
-            this.droppedFood++;
+            droppedFood++;
 
-            this.weight -= this.game.foodWeight;
+            this.weight -= game.foodWeight;
 
-            this.ui.notify(`Left ${this.droppedFood} food provisions behind`, 'negative');
+        }
+
+        if (droppedFood) {
+            game.ui.notify(`Left ${droppedFood} food provisions behind`, 'negative');
         }
     }
 

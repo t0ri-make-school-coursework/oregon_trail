@@ -24,7 +24,7 @@ const eventTypes = [
     type: 'STAT-CHANGE',
     notification: 'negative',
     stat: 'money',
-    value: -50,
+    value: -25,
     text: 'Pick pockets steal $'
   },
   {
@@ -60,7 +60,7 @@ const eventTypes = [
       notification: 'positive',
       stat: 'money',
       value: 20,
-      text: 'Found some coins in an abandoned wagon. Money added: '
+      text: 'Found coins in an abandoned wagon. Money added: $'
   },
   {
     type: 'SHOP',
