@@ -133,6 +133,10 @@ class UI {
             this.notify('Everybody died in the fight', 'negative');
           }
 
+          //remove event listener
+          document.getElementById('runaway').removeEventListener('click', this.runaway);
+          document.getElementById('attack').removeEventListener('click', this.fight);
+
           //resume journey
           document.getElementById('attack').classList.add('hidden');
           this.game.resumeJourney();
@@ -154,7 +158,8 @@ class UI {
           }
 
           //remove event listener
-          document.getElementById('runaway').removeEventListener('click', listener);
+          document.getElementById('runaway').removeEventListener('click', this.runaway);
+          document.getElementById('attack').removeEventListener('click', this.fight);
 
           //resume journey
           document.getElementById('attack').classList.add('hidden');
