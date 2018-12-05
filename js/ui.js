@@ -156,5 +156,6 @@ class UI {
           //resume journey
           document.getElementById('attack').classList.add('hidden');
           this.game.resumeJourney();
+
         };
 }
