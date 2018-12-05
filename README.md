@@ -4,4 +4,5 @@ Oregon Trail Project for FEW 1.2 at Make School. Based on [this tutorial](https:
 Play it live [here](http://www.toris.website/oregon.html).
 
 ## Issues
+* ~~event listeners on #attack initiate only once (and get removed when clicked)~~
 * wagon.png doesn't reach the end of trees.png when Distance reaches 1000
